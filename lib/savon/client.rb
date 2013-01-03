@@ -80,6 +80,8 @@ module Savon
       request_builder.http = http.dup
       request_builder.wsse = wsse.dup
       request_builder.config = config.dup
+      # in case soap got accessed before it does not have the configuration yet
+      request_builder.soap.config = request_builder.config if request_builder.soap 
 
       post_configuration = lambda { process(0, request_builder, &block) if block }
 
